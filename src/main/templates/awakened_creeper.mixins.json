@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.cimdy.awakenedcreeper.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "awakened_creeper.refmap.json",
+  "mixins": [
+    "CreeperMixin",
+    "goal.AvoidEntityGoalMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

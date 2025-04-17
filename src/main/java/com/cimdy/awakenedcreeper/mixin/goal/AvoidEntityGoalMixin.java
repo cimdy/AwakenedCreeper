@@ -17,21 +17,16 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AvoidEntityGoal.class)
-public class AvoidEntityGoalMixin<T extends LivingEntity> extends Goal {
+public abstract class AvoidEntityGoalMixin<T extends LivingEntity> extends Goal {
     @Shadow @Final protected PathfinderMob mob;
 
     @Shadow @Final protected Class<T> avoidClass;
 
     @Inject(method = "canUse", at = @At("RETURN"), cancellable = true)
     private void CreeperAvoidCat(CallbackInfoReturnable<Boolean> cir){
-        if(this.mob.getType() == EntityType.CREEPER){
-            cir.setReturnValue(!(this.avoidClass == Cat.class || this.avoidClass == Ocelot.class));
+        if(this.mob.getType() == EntityType.CREEPER
+                && (this.avoidClass == Cat.class || this.avoidClass == Ocelot.class)){
+            cir.setReturnValue(false);
         }
-    }
-
-
-    @Unique
-    public boolean canUse() {
-        return false;
     }
 }
